@@ -6,34 +6,113 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.21.0/dist/jquery.validate.min.js"></script>
     <title>jQuery</title>
     <script>
-        $(document).ready(function(){
-            $("#lewy").click(function(){
-            $("#col1").hide();
-            });
-    });
-    </script>
+      $(document).ready(function(){
+         $("#rejset").click(function(){
+             $("#rejestracja").show();
+             $("#produkty").hide();
+         });
+
+         $("#prod").click(function(){
+             $("#produkty").show();
+             $("#rejestracja").hide();
+         });
+
+         $("#rejestracja").validate({
+             rules: {
+                 uname: {
+                     required: true,
+                     minlength: 2
+                 },
+                 pass: {
+                     required: true,
+                     minlength: 5
+                 },
+                 ppass: {
+                     required: true,
+                     minlength: 5,
+                     equalTo: "#pass"
+                 },
+                 email: {
+                     required: true,
+                     email: true
+                 }
+             },
+             messages: {
+                 uname: {
+                     required: "Proszę podać nazwę użytkownika",
+                     minlength: "Twoja nazwa powinna składać się z najmniej 2 znaków"
+                 },
+                 pass: {
+                     required: "Proszę podać hasło",
+                     minlength: "Hasło powinno zawierać najmniej 5 znaków"
+                 },
+                 ppass: {
+                     required: "Proszę podać hasło",
+                     minlength: "Hasło powinno zawierać najmniej 5 znaków",
+                     equalTo: "Hasło nie zgadza się"
+                 },
+                 email: {
+                     required: "Proszę podać adres email",
+                     email: "Proszę podać prawidłowy adres email"
+                 }
+             }
+         });
+     });
+   </script>
+
 </head>
+
 <body>
-    <div class="jumbotron text-center ">
-        <h1>My First Bootstrap Page</h1>
-        <p>Resize this responsive page to see the effect!</p> 
+    <div class="jumbotron text-center"style="background: url(bg.jpg) ; background-size: 100%;">
+        <h1>Pasza dla świń</h1>
+        
       </div>
         
       <div class="container">
         <div class="row">
-          <div class="col-sm-6 " id="">
-            <h3>Column 1</h3>
-            <button type="button" class="btn" id="Prawy">Prawy</button>
-            <button type="button" class="btn" id="lewy">Lewy</button>            
-            
+          <div class="col-sm-6"  id="uslugi">
+            <h3>Wybór usług</h3>
+            <button type="button" class="btn" id="rejset">Rejestracja</button><br><br>            
+            <button type="button" class="btn" id="prod">Produkty</button>
 
           </div>
-          <div class="col-sm-6">
-            <h3>Column </h3>
-            
+          <div class="col-sm-6 h-100 d-inline">
+            <h3></h3>
+            <form id="rejestracja" style="display: none;">
+              <h3>Rejestracja</h3>
+              <P>
+              <label for="umane">Nazwa użytkownika:</label><br>
+              <input type="text" id="uname" name="uname"><br>
+              </P>
+              <p>
+              <label for="emale">Email:</label><br>
+              <input type="email" id="email" name="email" ><br>
+              </p>
+              <p>
+              <label for="pass">Hasło:</label><br>
+              <input type="password" id="pass" name="pass" ><br>
+              </p>
+              <p>
+              <label for="ppass">Potwierdź hasło:</label><br>
+              <input type="password" id="ppass" name="ppass" ><br>
+              </p>
+              
+              <input type="submit" value="Zarejestruj">
+            </form>
+            <form id="produkty" style="display: none;">
+              <!-- zdjecie nr1 -->
+               <h3>Nasze produkty</h3>
+              <div class="thumbnail">
+                  <img src="pasza1.jpg" alt="pasza1" style="width: 50%">
+                  <div class="caption">
+                    <p>Pasza Tucznik 1 od 45-80 kg mc opak 25kg</p>
+                  </div>
+                </a>
+              </div>
+            </form>
           </div>
           
         </div>
